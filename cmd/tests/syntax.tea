@@ -1,0 +1,45 @@
+## Types
+struct type AppleFlavor {
+    || "Red Delicious"
+    || "Cinnamon Spice"
+    || "Crimson Crisp"
+    || "Gala"
+    || "Honey Crisp"
+    || "Opel"
+}
+
+
+## Structs
+struct class Apple {
+    type AppleFlavor;
+    size int;
+}
+
+## Variables
+var name: string = "John"
+var symbol: rune = <!>
+var age: uint = 1000
+++age
+
+## Logging
+print("Hello, world")
+
+## If, Else, and Elif
+if (age >= 100 || age <= 0) {
+    print("You're faking it")
+}
+elif (age >= 18) {
+    print("You can come in")
+}
+else {
+    print("Invalid Age")
+}
+
+## Functions inside and outside variables
+var greet: func = (void) (void) => {
+    print("Hello World")
+}
+
+fn greet() void {
+    print("Hi my friend")
+}
