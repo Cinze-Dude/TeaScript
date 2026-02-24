@@ -1,6 +1,6 @@
 package ast
 
-import "go_tut/TeaScript/cmd/lexer"
+import "github.com/omar/TeaScript/cmd/lexer"
 
 // ---------------------
 // LITERAL EXPRESSIONS

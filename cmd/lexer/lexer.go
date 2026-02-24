@@ -83,6 +83,9 @@ func CreateLexer(src string) *lexer {
 			{regexp.MustCompile(`"[^"]*"|'[^']*'`), strHandler},
 			{regexp.MustCompile(`[0-9]+(\.[0-9]+)?`), numHandler},
 			{regexp.MustCompile(`\s+`), skipHandler},
+			{regexp.MustCompile(`<<`), defHandler(SHIFT_LEFT, "<<")},
+			{regexp.MustCompile(`>>`), defHandler(SHIFT_RIGHT, ">>")},
+			{regexp.MustCompile(`\|\~`), defHandler(XOR, "|~")},
 			{regexp.MustCompile(`\[`), defHandler(OPEN_BRACK, "[")},
 			{regexp.MustCompile(`\]`), defHandler(CLOSE_BRACK, "]")},
 			{regexp.MustCompile(`\{`), defHandler(OPEN_CURLY, "{")},
@@ -118,7 +121,7 @@ func CreateLexer(src string) *lexer {
 			{regexp.MustCompile(`\*`), defHandler(STAR, "*")},
 			{regexp.MustCompile(`%`), defHandler(PERC, "%")},
 			{regexp.MustCompile(`\$`), defHandler(MODL, "$")},
-			{regexp.MustCompile(`\*\*`), defHandler(POWR, "^")},
+			{regexp.MustCompile(`\^`), defHandler(POWR, "^")},
 		},
 	}
 }

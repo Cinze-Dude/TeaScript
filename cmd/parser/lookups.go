@@ -1,8 +1,8 @@
 package parser
 
 import (
-	"go_tut/TeaScript/cmd/ast"
-	"go_tut/TeaScript/cmd/lexer"
+	"github.com/omar/TeaScript/cmd/ast"
+	"github.com/omar/TeaScript/cmd/lexer"
 )
 
 type binding_power int
@@ -56,6 +56,10 @@ func createTokenLookups() {
 	led(lexer.AND, logical, parseBinExpr)
 	led(lexer.DBL_DOT, logical, parseBinExpr)
 	led(lexer.OR, logical, parseBinExpr)
+	led(lexer.XOR, logical, parseBinExpr)
+	led(lexer.SHIFT_LEFT, logical, parseBinExpr)  // choose suitable binding power
+	led(lexer.SHIFT_RIGHT,logical, parseBinExpr)
+
 
 	// Relational (6 >= 5)
 	led(lexer.LESS, relational, parseBinExpr)

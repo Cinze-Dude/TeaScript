@@ -49,6 +49,9 @@ const (
 	NOT
 	AND
 	OR
+	XOR
+	SHIFT_LEFT
+	SHIFT_RIGHT
 
 	// In/Decrementers
 	DBL_PLUS
@@ -228,6 +231,12 @@ func TokenKindString(kind TokenKind) (string, string) {
 		return "and", "&&"
 	case OR:
 		return "or", "||"
+	case XOR:
+		return "xor", "~|"
+	case SHIFT_LEFT:
+		return "shift_left", "<<"
+	case SHIFT_RIGHT:
+		return "shift_right", ">>"
 	case DBL_MINS:
 		return "minus_minus", "--"
 	case DBL_PLUS:

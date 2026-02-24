@@ -2,8 +2,8 @@ package parser
 
 import (
 	"fmt"
-	"go_tut/TeaScript/cmd/ast"
-	"go_tut/TeaScript/cmd/lexer"
+	"github.com/omar/TeaScript/cmd/ast"
+	"github.com/omar/TeaScript/cmd/lexer"
 	"strconv"
 )
 
@@ -58,7 +58,11 @@ func parsePrimaryExpr(p *parser) ast.Expr {
 
 func parseBinExpr(p *parser, left ast.Expr, bp binding_power) ast.Expr {
 	opToken := p.adv()
-	right := parse_expr(p, bp)
+	rightBP := bp
+	if opToken.Kind == lexer.POWR { // right-associative
+		rightBP = bp - 1
+	}
+	right := parse_expr(p, rightBP)
 
 	return ast.BinExpr{
 		Operator: opToken,
@@ -66,3 +70,4 @@ func parseBinExpr(p *parser, left ast.Expr, bp binding_power) ast.Expr {
 		Right:    right,
 	}
 }
+

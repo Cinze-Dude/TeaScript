@@ -1,6 +1,6 @@
 package parser
 
-import "go_tut/TeaScript/cmd/ast"
+import "github.com/omar/TeaScript/cmd/ast"
 
 func parseStmt(p *parser) ast.Stmt {
 	stmt_fn, exists := stmt_lu[p.currentTokenKind()]

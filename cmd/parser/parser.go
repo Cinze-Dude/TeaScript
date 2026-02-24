@@ -1,8 +1,8 @@
 package parser
 
 import (
-	"go_tut/TeaScript/cmd/ast"
-	"go_tut/TeaScript/cmd/lexer"
+	"github.com/omar/TeaScript/cmd/ast"
+	"github.com/omar/TeaScript/cmd/lexer"
 )
 
 func createParser(tokens []lexer.Token) *parser {
