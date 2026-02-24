@@ -1,17 +1,16 @@
 package main
 
 import (
-	"fmt"
+	//"os"
+	"github.com/sanity-io/litter"
 	"github.com/omar/TeaScript/cmd/lexer"
 	"github.com/omar/TeaScript/cmd/parser"
 )
 
 func main() {
-	var src string = `43.56 + 6 ^ 2`
+	//bytes, _ := os.ReadFile("./tests/test.tea")
+	tokens :=  lexer.Tokenize("10.5 * 6 + 5 ^ 3" /* string(bytes) */)
 
-	tokens := lexer.Tokenize(string(src))
-
-	ast := String(parser.Parse(tokens))
-
-	fmt.Println(ast)
+	ast := parser.Parse(tokens)
+	litter.Dump(ast)
 }

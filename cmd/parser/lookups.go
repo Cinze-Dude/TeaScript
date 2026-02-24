@@ -41,8 +41,8 @@ func led(kind lexer.TokenKind, bp binding_power, led_fn ledHandler) {
 	led_lu[kind] = led_fn
 }
 
-func nud(kind lexer.TokenKind, nud_fn nudHandler) {
-	bp_lu[kind] = primary
+func nud(kind lexer.TokenKind, bp binding_power, nud_fn nudHandler) {
+	bp_lu[kind] = bp
 	nud_lu[kind] = nud_fn
 }
 
@@ -52,16 +52,15 @@ func stmt(kind lexer.TokenKind, stmt_fn stmtHandler) {
 }
 
 func createTokenLookups() {
-	// Logical (IsOld && IsMarried)
+	// Logical operators
 	led(lexer.AND, logical, parseBinExpr)
-	led(lexer.DBL_DOT, logical, parseBinExpr)
 	led(lexer.OR, logical, parseBinExpr)
 	led(lexer.XOR, logical, parseBinExpr)
-	led(lexer.SHIFT_LEFT, logical, parseBinExpr)  // choose suitable binding power
-	led(lexer.SHIFT_RIGHT,logical, parseBinExpr)
+	led(lexer.DBL_DOT, logical, parseBinExpr)
+	led(lexer.SHIFT_LEFT, logical, parseBinExpr)
+	led(lexer.SHIFT_RIGHT, logical, parseBinExpr)
 
-
-	// Relational (6 >= 5)
+	// Relational operators
 	led(lexer.LESS, relational, parseBinExpr)
 	led(lexer.MORE, relational, parseBinExpr)
 	led(lexer.LESS_EQL, relational, parseBinExpr)
@@ -69,7 +68,7 @@ func createTokenLookups() {
 	led(lexer.EQL, relational, parseBinExpr)
 	led(lexer.NOT_EQL, relational, parseBinExpr)
 
-	// Additive, Multiplicative & Exponantiative
+	// Additive / Multiplicative / Exponential
 	led(lexer.PLUS, additive, parseBinExpr)
 	led(lexer.MINS, additive, parseBinExpr)
 	led(lexer.STAR, multiplicative, parseBinExpr)
@@ -78,9 +77,17 @@ func createTokenLookups() {
 	led(lexer.MODL, multiplicative, parseBinExpr)
 	led(lexer.POWR, exponantiative, parseBinExpr)
 
-	// Literals & Symbols (10, let)
-	nud(lexer.STRING, parsePrimaryExpr)
-	nud(lexer.NUMBER, parsePrimaryExpr)
-	nud(lexer.RUNE, parsePrimaryExpr)
-	nud(lexer.IDENTIFIER, parsePrimaryExpr)
+	// Literals & symbols
+	nud(lexer.NUMBER, primary, parsePrimaryExpr)
+	nud(lexer.STRING, primary, parsePrimaryExpr)
+	nud(lexer.RUNE, primary, parsePrimaryExpr)
+	nud(lexer.IDENTIFIER, primary, parsePrimaryExpr)
+
+	// Unary operators
+	nud(lexer.PLUS, unary, parseUnaryExpr)
+	nud(lexer.MINS, unary, parseUnaryExpr)
+	nud(lexer.NOT, unary, parseUnaryExpr)
+	nud(lexer.SQRT, unary, parseUnaryExpr)
+
+	// TODO: Add statement registrations like var, if, while here if needed
 }
